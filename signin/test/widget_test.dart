@@ -1,30 +1,113 @@
-// This is a basic Flutter widget test.
+import 'dart:math';
+
+List<int> lottoNumber() {
+//   final random = Random();
+//   final Set<int> lottoSet = {};
+//   var num;
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+//   while (lottoSet.length != 6)
+//
+// //   for(int i=0; i<6; i++){
+// //     num = random.nextInt(45)+1;
+//     lottoSet.add(random.nextInt(45) + 1);
+// //
+// }
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+  var number = (List<int>.generate(45, (i) => i + 1)..shuffle()).sublist(0, 6);
+  print('당첨번호');
+  print(number);
 
-import 'package:signin/main.dart';
+  return number;
+}
+
+List<int> myNumber() {
+//   final random = Random();
+//   final Set<int> mySet = {};
+//   var num;
+//
+//   while (mySet.length != 6)
+//
+// //   for(int i=0; i<6; i++){
+// //     num = random.nextInt(45)+1;
+//     mySet.add(random.nextInt(45) + 1);
+// //   }
+  var number2 =
+      (List<int>.generate(45, (index) => ++index)..shuffle()).sublist(0, 6);
+  print('당첨번호');
+  print(number2);
+
+  return number2;
+}
+// }
+
+void checkNumber(List<int> number, List<int> number2) {
+  int match = 0;
+
+  for (int lotto in number) {
+    for (int myNum in number2) {
+      if (lotto == myNum) {
+        match++;
+        print('당첨번호 : $myNum');
+      }
+//       print('로또번호 = $lotto');
+//       print('내 추첨번호 = $myNum');
+    }
+  }
+
+  print('$match개의 당첨번호가 있습니다');
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  List<int> lottoFinal = lottoNumber();
+  List<int> myFinal = myNumber();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  checkNumber(lottoFinal, myFinal);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  var test = (List<int>.generate(45, (i) => i + 1)..shuffle()).sublist(0, 6);
+  print(test);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  Person p1 = new Person();
+
+  p1.age = 20;
+  p1.name = 'James';
+  p1.show();
+
+  p1
+    ..name = 'Jamie'
+    ..setA(30)
+    ..show();
+
+//   List<String> rainbow = ['빨','주','노','초','파','남','보'];
+
+//   rainbow.forEach((name){
+//     print(name);
+//   });
+
+//   for(String x in rainbow){
+//     print(x);
+//   }
+
+//   for(int i = 0; i<rainbow.length; i++){
+//     print(rainbow[i]);
+//   }
+
+//   forward(5);
 }
+
+class Person {
+  String? name;
+  int? age;
+
+  void setA(int x) {
+    this.age = x;
+  }
+
+  void show() {
+    print(this.age);
+    print(this.name);
+  }
+}
+// void forward(int move){
+//   for(int i=1; i<move; i++){
+//     print('$i칸 이동');
+//   }
